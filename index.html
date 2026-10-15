@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Prototipo Proyecto Vivo UBP</title>
+  <meta name="description" content="Prototipo interactivo de Proyecto Vivo - Universidad Blas Pascal. Alternativa a tesis y prácticas profesionales.">
+
+  <!-- Fuente Oficial Figtree -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon UBP -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239E1B34'><rect width='24' height='24' rx='6' fill='%239E1B34'/><path d='M12 22V12M12 12C12 7 8 5 4 5c0 5 3 7 8 7zM12 14c0-4 3-6 8-6 0 4-3 6-8 6z' stroke='%23FFCD00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+  <!-- Estilos del prototipo y simulador -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="simulator-outer-wrapper">
+    
+    <!-- Barra superior auxiliar para escritorio (Controles de prueba) -->
+    <header class="desktop-controls-bar">
+      <div class="desktop-brand-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9E1B34" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <strong>Proyecto Vivo</strong> <span>UBP</span>
+      </div>
+
+      <div class="desktop-actions">
+        <button type="button" class="btn-desktop-tool" id="btn-toggle-complete-all" title="Alternar entre estado en curso (2/5) y completo (5/5)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
+          <span id="label-toggle-all">Completar (5/5)</span>
+        </button>
+
+        <button type="button" class="btn-desktop-tool" id="btn-desktop-reset" title="Restablecer datos originales del prototipo">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Reiniciar
+        </button>
+      </div>
+    </header>
+
+    <!-- Marco del Smartphone -->
+    <main class="smartphone-frame" role="region" aria-label="Simulador de Smartphone Proyecto Vivo UBP">
+      
+      <!-- Notch / Isla Dinámica -->
+      <div class="phone-notch" aria-hidden="true">
+        <div class="camera-lens"></div>
+      </div>
+
+      <!-- Barra de Estado Simulada (9:41, WiFi, Batería) -->
+      <div class="phone-status-bar" id="phone-status-bar" aria-hidden="true">
+        <span>9:41</span>
+        <div class="status-bar-icons">
+          <!-- Signal -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2" y="16" width="3" height="6" rx="1"/>
+            <rect x="7" y="12" width="3" height="10" rx="1"/>
+            <rect x="12" y="8" width="3" height="14" rx="1"/>
+            <rect x="17" y="4" width="3" height="18" rx="1"/>
+          </svg>
+          <!-- Wifi -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+          </svg>
+          <!-- Battery -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="16" height="10" rx="2" ry="2"/>
+            <line x1="22" y1="11" x2="22" y2="13"/>
+            <rect x="4" y="9" width="10" height="6" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Contenedor Scrollable del Teléfono -->
+      <div class="phone-screen-content" id="phone-screen-container">
+
+        <!-- ==============================================
+             PANTALLA 1: SUBÍ TU PROYECTO
+             ============================================== -->
+        <section id="view-inicio" class="screen-view active">
+          
+          <div class="view-1-header">
+            <div class="view-1-brand-row">
+              <div class="view-1-logo-group">
+                <div class="view-1-logo-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3D2E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22V12"></path>
+                    <path d="M12 12C12 7 8 5 4 5c0 5 3 7 8 7z"></path>
+                    <path d="M12 14c0-4 3-6 8-6 0 4-3 6-8 6z"></path>
+                  </svg>
+                </div>
+                <div style="font-size: 18px; font-weight: 700">Proyecto Vivo</div>
+              </div>
+              <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; opacity: 0.9">UBP</div>
+            </div>
+            
+            <div class="view-1-title">Tu idea no termina con la nota</div>
+            <div class="view-1-sub">Subí el proyecto de tu materia y continualo como alternativa a la tesis o a la práctica profesional.</div>
+          </div>
+
+          <form id="form-subi-proyecto" class="view-1-body">
+            
+            <div class="field-group">
+              <label for="nombre" class="field-label">Nombre del proyecto</label>
+              <input id="nombre" type="text" class="input-text" placeholder="Ej.: App de reciclaje para el campus" required>
+            </div>
+
+            <div class="field-group">
+              <label for="materia" class="field-label">Materia donde nació</label>
+              <input id="materia" type="text" class="input-text" placeholder="Ej.: Innovación Tecnológica" required>
+            </div>
+
+            <div class="field-group">
+              <div class="field-label">Quiero usarlo como</div>
+              <div class="type-buttons-row">
+                <button type="button" class="btn-type-option active" id="opt-thesis">Alternativa a tesis</button>
+                <button type="button" class="btn-type-option" id="opt-practice">Práctica profesional</button>
+              </div>
+            </div>
+
+            <div class="pdf-drop-box" id="dropzone-pdf" tabindex="0" role="button" aria-label="Subir PDF del trabajo">
+              <input type="file" id="file-pdf-input" accept=".pdf,.doc,.docx" style="display: none;">
+              <div class="pdf-icon-yellow">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A5C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 16V4"></path>
+                  <path d="M7 9l5-5 5 5"></path>
+                  <path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path>
+                </svg>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 2px">
+                <div style="font-size: 15px; font-weight: 600" id="pdf-box-title">Subí el PDF de tu trabajo</div>
+                <div style="font-size: 13px; color: #5B5560" id="pdf-box-sub">El que entregaste en la materia</div>
+              </div>
+            </div>
+
+            <div style="flex: 1; min-height: 16px;"></div>
+
+            <button type="submit" class="btn-submit-main">Subir proyecto</button>
+            <div style="font-size: 13px; color: #5B5560; text-align: center">Tu docente revisa la propuesta y te ayuda a armar el cronograma.</div>
+          </form>
+
+          <!-- Tab Bar -->
+          <nav class="bottom-tab-bar" aria-label="Navegación">
+            <a href="#inicio" class="tab-link active" data-tab="inicio">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+              Inicio
+            </a>
+            <a href="#hitos" class="tab-link" data-tab="hitos">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v15H4z"></path><path d="M4 9h16M8 3v4M16 3v4"></path></svg>
+              Hitos
+            </a>
+            <a href="#mentores" class="tab-link" data-tab="mentores">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21c0-4 3-6 7-6s7 2 7 6"></path><path d="M17 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-6"></path></svg>
+              Mentores
+            </a>
+            <a href="#final" class="tab-link" data-tab="final">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"></path><path d="M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 6h3a3 3 0 0 1-3 4M7 6H4a3 3 0 0 0 3 4"></path></svg>
+              Final
+            </a>
+          </nav>
+        </section>
+
+        <!-- ==============================================
+             PANTALLA 2: HITOS Y AVISOS
+             ============================================== -->
+        <section id="view-hitos" class="screen-view">
+          
+          <div class="view-2-top">
+            <div style="font-size: 13px; font-weight: 600; color: #9E1B34">Mi proyecto</div>
+            <div style="font-size: 24px; font-weight: 700; line-height: 1.25;" id="hitos-project-name">[Nombre del proyecto]</div>
+          </div>
+
+          <div class="view-2-body">
+            
+            <!-- Aviso de Punto de Control -->
+            <div class="alert-yellow-card" id="card-alert-control">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D2E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                <path d="M10 21a2 2 0 0 0 4 0"></path>
+              </svg>
+              <div style="display: flex; flex-direction: column; gap: 2px">
+                <div style="font-size: 15px; font-weight: 700; color: #3D2E00">Punto de control este viernes</div>
+                <div style="font-size: 13px; color: #3D2E00; line-height: 1.4">Subí tu avance del análisis de mercado para que tu docente lo revise.</div>
+              </div>
+            </div>
+
+            <!-- Avance General -->
+            <div class="progress-white-card">
+              <div style="display: flex; justify-content: space-between; align-items: baseline">
+                <div style="font-size: 15px; font-weight: 600">Avance general</div>
+                <div style="font-size: 13px; color: #5B5560" id="hitos-week-label">Semana 6 de 16</div>
+              </div>
+              <div style="height: 10px; border-radius: 5px; background: #EDE6DE">
+                <div id="hitos-progress-bar-fill" style="width: 40%; height: 10px; border-radius: 5px; background: #9E1B34; transition: width 260ms ease;"></div>
+              </div>
+              <div style="font-size: 13px; color: #5B5560" id="hitos-progress-count-label">2 de 5 hitos cumplidos</div>
+            </div>
+
+            <!-- Lista de Hitos Oficiales -->
+            <div class="milestones-white-card" id="milestones-list-wrapper">
+              <!-- Renderizado interactivo desde JS -->
+            </div>
+
+            <button type="button" class="btn-help-outline" id="btn-pedir-ayuda">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                <path d="M12 15v2"></path>
+                <path d="M5 11h14v10H5z"></path>
+              </svg>
+              ¿Te trabaste? Pedí ayuda
+            </button>
+
+            <div style="flex: 1; min-height: 8px;"></div>
+          </div>
+
+          <!-- Tab Bar -->
+          <nav class="bottom-tab-bar" aria-label="Navegación">
+            <a href="#inicio" class="tab-link" data-tab="inicio">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+              Inicio
+            </a>
+            <a href="#hitos" class="tab-link active" data-tab="hitos">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v15H4z"></path><path d="M4 9h16M8 3v4M16 3v4"></path></svg>
+              Hitos
+            </a>
+            <a href="#mentores" class="tab-link" data-tab="mentores">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21c0-4 3-6 7-6s7 2 7 6"></path><path d="M17 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-6"></path></svg>
+              Mentores
+            </a>
+            <a href="#final" class="tab-link" data-tab="final">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"></path><path d="M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 6h3a3 3 0 0 1-3 4M7 6H4a3 3 0 0 0 3 4"></path></svg>
+              Final
+            </a>
+          </nav>
+        </section>
+
+        <!-- ==============================================
+             PANTALLA 3: MENTOR UBP (LA TRABA)
+             ============================================== -->
+        <section id="view-mentores" class="screen-view">
+          
+          <div class="view-3-top">
+            <a href="#hitos" style="font-size: 14px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px; min-height: 32px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+              Volver a mis hitos
+            </a>
+            <div style="font-size: 24px; font-weight: 700; line-height: 1.2">¿En qué te trabaste?</div>
+            <div style="font-size: 15px; color: #5B5560; line-height: 1.4">Elegí el tema y te conectamos con un graduado de la UBP que ya pasó por eso.</div>
+          </div>
+
+          <div class="view-3-body">
+            
+            <!-- Grilla 2x2 de Categorías -->
+            <div class="categories-2x2-grid" id="mentor-categories-grid">
+              <button type="button" class="btn-cat-choice" data-category="tecnico">Técnico</button>
+              <button type="button" class="btn-cat-choice active" data-category="legal">Legal</button>
+              <button type="button" class="btn-cat-choice" data-category="financiero">Financiero</button>
+              <button type="button" class="btn-cat-choice" data-category="comercial">Comercial</button>
+            </div>
+
+            <div style="font-size: 13px; font-weight: 700; color: #5B5560; letter-spacing: 0.04em">MENTOR SUGERIDO</div>
+
+            <!-- Tarjeta Mentor Sugerido -->
+            <div class="mentor-big-card" id="suggested-mentor-card">
+              <!-- Renderizado dinámico -->
+            </div>
+
+            <!-- Otro graduado UBP -->
+            <div class="mentor-secondary-card" id="secondary-mentor-card">
+              <!-- Renderizado dinámico -->
+            </div>
+
+            <div style="flex: 1; min-height: 8px;"></div>
+          </div>
+
+          <!-- Tab Bar -->
+          <nav class="bottom-tab-bar" aria-label="Navegación">
+            <a href="#inicio" class="tab-link" data-tab="inicio">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+              Inicio
+            </a>
+            <a href="#hitos" class="tab-link" data-tab="hitos">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v15H4z"></path><path d="M4 9h16M8 3v4M16 3v4"></path></svg>
+              Hitos
+            </a>
+            <a href="#mentores" class="tab-link active" data-tab="mentores">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21c0-4 3-6 7-6s7 2 7 6"></path><path d="M17 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-6"></path></svg>
+              Mentores
+            </a>
+            <a href="#final" class="tab-link" data-tab="final">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"></path><path d="M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 6h3a3 3 0 0 1-3 4M7 6H4a3 3 0 0 0 3 4"></path></svg>
+              Final
+            </a>
+          </nav>
+        </section>
+
+        <!-- ==============================================
+             PANTALLA 4: PRESENTACIÓN FINAL
+             ============================================== -->
+        <section id="view-final" class="screen-view">
+          
+          <div class="view-4-header">
+            <div class="view-4-trophy-box">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3D2E00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 21h8M12 17v4"></path>
+                <path d="M7 4h10v5a5 5 0 0 1-10 0z"></path>
+                <path d="M17 6h3a3 3 0 0 1-3 4M7 6H4a3 3 0 0 0 3 4"></path>
+              </svg>
+            </div>
+            <div style="font-size: 26px; font-weight: 700; line-height: 1.2">¡Tu proyecto está listo para presentar!</div>
+            <div style="font-size: 15px; line-height: 1.45; opacity: 0.92">Cumpliste todos los hitos. Tu idea no murió en el aula.</div>
+          </div>
+
+          <div class="view-4-body">
+            
+            <!-- Avance 5 de 5 -->
+            <div style="background: #FFFFFF; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+              <div style="display: flex; justify-content: space-between; align-items: baseline">
+                <div style="font-size: 15px; font-weight: 600">Avance general</div>
+                <div style="font-size: 13px; font-weight: 700; color: #2F6B4F" id="final-status-pill">5 de 5 hitos</div>
+              </div>
+              <div style="height: 10px; border-radius: 5px; background: #2F6B4F"></div>
+            </div>
+
+            <!-- Presentación ante la Facultad -->
+            <div style="background: #FFFFFF; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+              <div style="font-size: 13px; font-weight: 700; color: #5B5560; letter-spacing: 0.04em">PRESENTACIÓN ANTE LA FACULTAD</div>
+              <div style="font-size: 16px; font-weight: 600" id="final-mode-text">Como alternativa a tesis</div>
+              <div style="font-size: 14px; color: #5B5560" id="final-date-text">Fecha: [a definir con tu docente]</div>
+            </div>
+
+            <div style="font-size: 13px; font-weight: 700; color: #5B5560; letter-spacing: 0.04em; margin-top: 4px">¿CÓMO SIGUE DESPUÉS?</div>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <button type="button" class="path-choice-button active" id="btn-path-startup">
+                <span style="font-size: 15px; font-weight: 700; color: #9E1B34">Seguir como emprendimiento</span>
+                <span style="font-size: 13px; color: #5B5560">Te conectamos con la incubadora y mentores de negocio</span>
+              </button>
+              <button type="button" class="path-choice-button" id="btn-path-impact">
+                <span style="font-size: 15px; font-weight: 700; color: #1C1B1F">Iniciativa de impacto</span>
+                <span style="font-size: 13px; color: #5B5560">Para proyectos sociales, ambientales o comunitarios</span>
+              </button>
+            </div>
+
+            <div style="flex: 1; min-height: 8px;"></div>
+
+            <button type="button" class="btn-submit-main" id="btn-agendar-presentacion">Agendar presentación</button>
+          </div>
+
+          <!-- Tab Bar -->
+          <nav class="bottom-tab-bar" aria-label="Navegación">
+            <a href="#inicio" class="tab-link" data-tab="inicio">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+              Inicio
+            </a>
+            <a href="#hitos" class="tab-link" data-tab="hitos">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v15H4z"></path><path d="M4 9h16M8 3v4M16 3v4"></path></svg>
+              Hitos
+            </a>
+            <a href="#mentores" class="tab-link" data-tab="mentores">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21c0-4 3-6 7-6s7 2 7 6"></path><path d="M17 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-6"></path></svg>
+              Mentores
+            </a>
+            <a href="#final" class="tab-link active" data-tab="final">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"></path><path d="M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 6h3a3 3 0 0 1-3 4M7 6H4a3 3 0 0 0 3 4"></path></svg>
+              Final
+            </a>
+          </nav>
+        </section>
+
+      </div>
+
+      <!-- Barra Home Indicator del smartphone -->
+      <div class="phone-home-indicator" aria-hidden="true"></div>
+
+      <!-- Contenedor Toasts -->
+      <div id="toast-container" aria-live="polite"></div>
+
+    </main>
+
+  </div>
+
+  <!-- ==============================================
+       MODALES NATIVOS INTERACTIVOS (<dialog>)
+       ============================================== -->
+
+  <!-- Modal Detalle / Entrega de Hito -->
+  <dialog id="modal-milestone">
+    <div class="modal-inner-card">
+      <div class="modal-header-row">
+        <h3 id="modal-milestone-title">Detalle del Hito</h3>
+        <button type="button" class="modal-close-icon" data-close-dialog aria-label="Cerrar modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="modal-milestone-body"></div>
+      <div class="modal-actions-row">
+        <button type="button" class="btn-modal-cancel" data-close-dialog>Cerrar</button>
+        <button type="button" class="btn-modal-confirm" id="btn-complete-milestone">Completar Hito</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal Agendar Charla Mentor -->
+  <dialog id="modal-booking">
+    <div class="modal-inner-card">
+      <div class="modal-header-row">
+        <h3 id="modal-booking-title">Pedir una charla con el Mentor</h3>
+        <button type="button" class="modal-close-icon" data-close-dialog aria-label="Cerrar modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="form-booking" style="display: flex; flex-direction: column; gap: 12px;">
+        <div id="modal-booking-summary"></div>
+        <div class="field-group">
+          <label for="booking-mode" class="field-label">Modalidad</label>
+          <select id="booking-mode" class="input-text">
+            <option value="Google Meet">Virtual (Google Meet)</option>
+            <option value="Presencial UBP">Presencial (Campus UBP Argüello)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="booking-date" class="field-label">Día y horario disponible</label>
+          <select id="booking-date" class="input-text">
+            <option value="Martes 16:30 hs">Martes próximo — 16:30 hs</option>
+            <option value="Jueves 11:00 hs">Jueves próximo — 11:00 hs</option>
+            <option value="Viernes 15:00 hs">Viernes próximo — 15:00 hs</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="booking-query" class="field-label">¿En qué necesitás ayuda puntual?</label>
+          <input type="text" id="booking-query" class="input-text" placeholder="Ej.: Habilitaciones y contratos" required>
+        </div>
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal-cancel" data-close-dialog>Cancelar</button>
+          <button type="submit" class="btn-modal-confirm">Confirmar charla</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modal Agendar Presentación Final -->
+  <dialog id="modal-presentation">
+    <div class="modal-inner-card">
+      <div class="modal-header-row">
+        <h3>Agendar Presentación Final</h3>
+        <button type="button" class="modal-close-icon" data-close-dialog aria-label="Cerrar modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="form-presentation-schedule" style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-size: 14px; color: #5B5560; line-height: 1.45;">
+          Seleccioná el turno propuesto con tu docente tutor ante el tribunal de la facultad:
+        </div>
+        <div class="field-group">
+          <label for="pres-date" class="field-label">Fecha y horario</label>
+          <select id="pres-date" class="input-text">
+            <option value="10 de Diciembre, 10:00 hs (Aula Magna)">Jueves 10 de Diciembre, 10:00 hs — Aula Magna</option>
+            <option value="15 de Diciembre, 16:30 hs (DoingLABS)">Martes 15 de Diciembre, 16:30 hs — DoingLABS</option>
+            <option value="18 de Diciembre, 11:00 hs (Virtual)">Viernes 18 de Diciembre, 11:00 hs — Virtual Meet</option>
+          </select>
+        </div>
+        <div class="modal-actions-row">
+          <button type="button" class="btn-modal-cancel" data-close-dialog>Cancelar</button>
+          <button type="submit" class="btn-modal-confirm">Confirmar fecha</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Script SPA -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
